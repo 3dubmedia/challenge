@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-12">
+        <div>
+           <a href="javascript:history.back()">Back</a>
+        </div>
+   
+        <div ng-repeat="(key, value) in $ctrl.jobs"  ng-if="key === 'url'">
+          <div>
+            <h1>{{value}}</h1>
+          </div>
+        </div>
+        
+        <div ng-repeat="(key, value) in $ctrl.jobs"  ng-if="key === 'source'">
+          <div ng-if="value">
+            <p>Status: Complete!</p>
+            <textarea rows="10" cols="100">{{value}}</textarea>
+          </div>
+          
+          <div ng-if="!value">
+              <p>Status: Failed!</p>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>

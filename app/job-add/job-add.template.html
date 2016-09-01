@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-12">
+      <h1>Add URL</h1>
+      <p>Format: http(s)://www.website.com</p>
+        <form name="jobForm" ng-submit="saveURL()">
+          URL: <input type="url" name="input" ng-model="job.url" required /> <input type="submit" class="btn btn-primary" value="Save"/>
+          <div role="alert">
+            <span class="error" ng-show="jobForm.input.$error.required">URL is required!</span>
+            <span class="error" ng-show="jobForm.input.$error.url">Not a valid URL!</span>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
