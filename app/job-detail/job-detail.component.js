@@ -9,12 +9,10 @@ angular.
         this.jobs = Job.get({id:this.jobID}).$promise.then(function (result) {
 
             this.job = result;
-              $scope.jobID= this.job.id;
-              $scope.state= this.job.state;
-                
+            $scope.jobID= this.job.id;
+            $scope.state= this.job.state;
+    
             if (this.job.state=="complete") {
-                console.log('complete');
-                
                 var url = "/api/html/"+this.job.id;
         
                 $http.get(url)
@@ -22,7 +20,6 @@ angular.
                   console.log(response.data);
                   $scope.source= response.data.source;
                 });
-                
             }
         });
       }
