@@ -34,8 +34,6 @@ app.use('/queue', kue.app);
 jobs.process('new job', function (job, done){
     
 setTimeout(function() {
- console.log('job id: '+job.id);
-
     thisURL= job.data.url;
     console.log('url: '+thisURL);
     // determine if it is HTTPS or not
@@ -98,16 +96,13 @@ setTimeout(function() {
 
 // get all jobs
 app.get('/api/jobs', function(req, res) {
-    // if jobID exists, look up job details 
+
     if (req.query.jobID) {
-        
         Job.findById(req.query.jobID, function(err, jobs) {
             if (err)
                 res.send(err);
             res.json(jobs);
         });
-        
-        
     } else {   // else get all jobs
         Job.find(function(err, jobs) {
             if (err)
@@ -126,7 +121,6 @@ app.get('/api/html/:id', function(req, res) {
         res.json(jobs);
     });
 });
-
 
 var staticRoot = __dirname + '/';
 app.set('port', (process.env.PORT || 3000));
