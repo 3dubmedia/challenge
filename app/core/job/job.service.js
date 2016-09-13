@@ -2,14 +2,14 @@ angular.
   module('core.job').
   factory('JobService', ['$resource',
     function($resource) {
-      return $resource('api/jobs', {}, {
+      return $resource('queue/job/:id', {id: this.jobID}, {
         query: {
           method: 'GET',
           isArray: true
         },
         get: {
           method: 'GET',
-          params: {jobID: this.jobID},
+          params: {id: this.jobID},
           isArray: false
         },
         create: {

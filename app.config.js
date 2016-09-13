@@ -14,6 +14,6 @@ angular.
         when('/jobs/:jobID', {
           template: '<job-detail></job-detail>'
         }).
-        otherwise('/jobs');
+        otherwise('/jobs/add');
     }
   ]);

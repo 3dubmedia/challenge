@@ -1,27 +1,22 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xl-12">
-        <div>
-           <a href="javascript:history.back()">Back</a>
-        </div>
+
    
-        <div ng-repeat="(key, value) in $ctrl.jobs"  ng-if="key === 'url'">
-          <div>
-            <h1>{{value}}</h1>
-          </div>
+        <div class="padding" ng-if="jobID">
+          Job ID: {{ jobID }}
         </div>
         
-        <div ng-repeat="(key, value) in $ctrl.jobs"  ng-if="key === 'source'">
-          <div ng-if="value">
-            <p>Status: Complete!</p>
-            <textarea rows="10" cols="100">{{value}}</textarea>
-          </div>
-          
-          <div ng-if="!value">
-              <p>Status: Failed!</p>
-          </div>
+        <div class="padding" ng-if="state">
+          Job State: {{ state }}
         </div>
-
+        
+        <div ng-if="source">
+          <textarea rows="20" cols="100">
+          {{ source }}
+          </textarea>
+        </div>
+        
     </div>
   </div>
 </div>

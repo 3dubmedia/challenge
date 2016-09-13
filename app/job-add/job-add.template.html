@@ -12,4 +12,22 @@
         </form>
     </div>
   </div>
+  
+  <div class="row padding"  ng-if="jobID">
+    <div class="col-xl-12">
+        <p class="message">{{ message }}</p>
+        <table class="table table-striped">
+        <tr>
+          <th>JOB ID</th>
+          <th>ACTION</th>
+        </tr>
+        <tr>
+          <td>{{ jobID }}</td>
+          <td><a href="#!/jobs/{{jobID}}" target="_blank">Check Status</a></td>
+        </tr>
+      </table>
+    </div>
+  </div>  
+  
+
 </div>

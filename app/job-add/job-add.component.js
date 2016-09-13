@@ -3,9 +3,22 @@ angular.
   component('jobAdd', {
     templateUrl: 'app/job-add/job-add.template.html',
     controller: function($location,$scope,JobService){  
-        $scope.saveURL = function(){  
-          JobService.create(this.job).$promise.then(function (result) {
-              $location.path('/jobs/');
+        $scope.saveURL = function(){
+          
+          var jobJSON =
+          {
+            "type": "new job",
+            "data": {
+              "url": this.job.url
+            }
+          };
+          console.log(jobJSON);           
+          JobService.create(jobJSON).$promise.then(function (result) {
+
+              this.job = result;
+
+              $scope.jobID= this.job.id;
+              $scope.message= this.job.message;
           });
         }
       }

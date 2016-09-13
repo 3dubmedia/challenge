@@ -21,36 +21,23 @@ app.use(methodOverride());
 
 // MODEL
 var Job = mongoose.model('Job', {
+    jobID: String,
     url: String,
     source : String
 });
 
-// ROUTES
+// KUE
+var kue = require('kue');
+var jobs = kue.createQueue();
+app.use('/queue', kue.app);
 
-// get all jobs
-app.get('/api/jobs', function(req, res) {
-    if (req.query.jobID) {
-        Job.findById(req.query.jobID, function(err, jobs) {
-            if (err)
-                res.send(err);
-            res.json(jobs);
-        });
-    } else {   
-        Job.find(function(err, jobs) {
-            if (err)
-                res.send(err)
-            res.json(jobs); 
-        });
-    }
-});
-
-
-// create job 
-app.post('/api/jobs', function(req, res) {
+jobs.process('new job', function (job, done){
     
-    // get URL from front end
-    var thisURL = req.body.url;
-    
+setTimeout(function() {
+ console.log('job id: '+job.id);
+
+    thisURL= job.data.url;
+    console.log('url: '+thisURL);
     // determine if it is HTTPS or not
     var isHTTPS = thisURL.includes('https');
     var protocalType='http';
@@ -92,16 +79,54 @@ app.post('/api/jobs', function(req, res) {
     // insert into the db
     download(thisURL, function(data) {
         Job.create({
+            jobID : job.id,
             url : thisURL,
             source: data,
             done : false
         }, function(err, job) {
             if (err)
-                res.send(err)
-            res.json(job); 
+                console.log(err)
         });
     });
+
+    done && done();
+}, 10000);
+   
+}); // end job proccess
+
+// ROUTES
+
+// get all jobs
+app.get('/api/jobs', function(req, res) {
+    // if jobID exists, look up job details 
+    if (req.query.jobID) {
+        
+        Job.findById(req.query.jobID, function(err, jobs) {
+            if (err)
+                res.send(err);
+            res.json(jobs);
+        });
+        
+        
+    } else {   // else get all jobs
+        Job.find(function(err, jobs) {
+            if (err)
+                res.send(err)
+            res.json(jobs); 
+        });
+    }
 });
+
+// get html
+app.get('/api/html/:id', function(req, res) {
+    console.log(req.params.id)
+    Job.findOne({'jobID': req.params.id}, function(err, jobs) {
+        if (err)
+            res.send(err);
+        res.json(jobs);
+    });
+});
+
 
 var staticRoot = __dirname + '/';
 app.set('port', (process.env.PORT || 3000));
