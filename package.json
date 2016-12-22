@@ -9,7 +9,6 @@
   "license": "ISC",
   "dependencies": {
     "angular": "1.5.x",
-    "angular-mocks": "1.5.x",
     "angular-route": "1.5.x",
     "bootstrap": "latest",
     "express": "^4.14.0",
