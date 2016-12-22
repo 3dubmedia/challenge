@@ -2,7 +2,6 @@ var express = require('express'),
     path = require('path'),
     http = require('http'),
     https = require('https'),
-    request = require("request"),
     fs = require('fs');
 
 var app = express();
