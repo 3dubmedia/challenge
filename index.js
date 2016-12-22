@@ -92,24 +92,6 @@ setTimeout(function() {
 
 // ROUTES
 
-// get all jobs
-app.get('/api/jobs', function(req, res) {
-
-    if (req.query.jobID) {
-        Job.findById(req.query.jobID, function(err, jobs) {
-            if (err)
-                res.send(err);
-            res.json(jobs);
-        });
-    } else {   // else get all jobs
-        Job.find(function(err, jobs) {
-            if (err)
-                res.send(err)
-            res.json(jobs); 
-        });
-    }
-});
-
 // get html
 app.get('/api/html/:id', function(req, res) {
     console.log(req.params.id)
