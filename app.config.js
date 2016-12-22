@@ -5,9 +5,6 @@ angular.
       $locationProvider.hashPrefix('!');
 
       $routeProvider.
-        when('/jobs', {
-          template: '<job-list></job-list>'
-        }).
         when('/jobs/add', {
           template: '<job-add></job-add>'
         }).
